@@ -1,4 +1,4 @@
-import { API_URL } from '../config';
+import { API } from '../config';
 
 /**
  * This method will signup or create a new user
@@ -6,7 +6,7 @@ import { API_URL } from '../config';
  */
 export const signUp = user => {
 
-    return fetch(`${API_URL}/signup`, {
+    return fetch(`${API}/signup`, {
        method: "POST",
        headers: {
           Accept: "application/json",
@@ -28,7 +28,7 @@ export const signUp = user => {
  */
  export const signIn = user => {
 
-    return fetch(`${API_URL}/signin`, {
+    return fetch(`${API}/signin`, {
        method: "POST",
        headers: {
           Accept: "application/json",
@@ -66,7 +66,7 @@ export const signout = (next) =>{
       localStorage.removeItem('jwt');
       next();
 
-      fetch(`${API_URL}/signout`,{
+      fetch(`${API}/signout`,{
          method: "GET"         
       })
       .then(response=>{

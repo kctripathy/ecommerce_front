@@ -10,6 +10,8 @@ import UserDashboard from './user/UserDashboard';
 import PrivateRoute from './auth/PrivateRoute';
 import AdminDashboard from './user/AdminDashboard';
 import AdminRoute from './auth/AdminRoute';
+import AddCategory from './admin/AddCategory';
+import AddProduct from './admin/AddProduct';
 
 const Routers = () => (
     <>
@@ -22,6 +24,9 @@ const Routers = () => (
                 <Route path="/services" component={Services} exact />
                 <PrivateRoute path="/dashboard" component={UserDashboard} />
                 <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
+                <AdminRoute path="/create/category" exact component={AddCategory} />
+                <AdminRoute path="/create/product" exact component={AddProduct} />
+                
                 <Route component={PageNotFound} />
             </Switch>
         </Router>

@@ -39,6 +39,7 @@ const AddProduct = () => {
 
     // load categories and set form data
     const init = () => {
+        debugger;
         getCategories().then(data => {
             if (data.error) {
                 setValues({ ...values, error: data.error });
