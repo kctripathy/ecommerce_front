@@ -1,0 +1,11 @@
+.active
+{
+    color: blue !important;    
+    /* font-weight: bold; */
+    /* text-decoration: underline; */
+}
+
+.inactive {
+    color: black !important;
+    /* padding: 5px; */
+}
