@@ -27,7 +27,7 @@ const handleRedirect = (history) => {
 const NavBar = ({ history }) => {
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-primary">
                 <Link className="navbar-brand" to="/">Learn React JS</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -43,6 +43,14 @@ const NavBar = ({ history }) => {
                         </li>
                         <li className="nav-item">
                             <Link className={isActive(history, "/services")} to="/services">Services</Link>
+                        </li>
+
+                        <li className="nav-item">
+                            <Link className={isActive(history, "/shop")} to="/shop">Shop</Link>
+                        </li>
+
+                        <li className="nav-item">
+                            <Link className={isActive(history, "/cart")} to="/cart">Cart</Link>
                         </li>
 
                         {/* ADMIN LINKS  */}

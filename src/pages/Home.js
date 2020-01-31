@@ -1,11 +1,13 @@
 import React from 'react';
 import Layout from '../core/Layout';
+import Products from '../core/Products';
 
 const  Home = () => {
     return (
-     <Layout title="Home" description="Some text for home page description. Learning React">
-   
-         ........
+     <Layout title="FullStack React Node MongoDB Ecommerce App" 
+				description="Node React E-commerce App"  
+				className="container-fluid">  
+         <Products />
      </Layout>
     );
 }

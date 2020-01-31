@@ -82,7 +82,7 @@ export const signout = (next) =>{
  * This method will check if user has logged into the system or not
  */
 export const isAuthenticated = () =>{
-   debugger;
+    
    if (typeof window === "undefined"){
       return false;
    }
