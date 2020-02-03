@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState,useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { signout, isAuthenticated } from '../auth';
-
+import {itemTotal} from '../pages/cartHelpers';
 
 const { user } = isAuthenticated();
 
@@ -14,7 +14,7 @@ const isActive = (history, path) => {
         return ("nav-link inactive")
     }
 }
-    
+
 const handleRedirect = (history) => {
     if (user && user.role === 1) {
         history.push("/admin/dashboard")
@@ -24,7 +24,12 @@ const handleRedirect = (history) => {
     }
 }
 
+
 const NavBar = ({ history }) => {
+    
+     
+    //console.log('nav bar rendered: itemCount', itemCount)
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-primary">
@@ -38,19 +43,24 @@ const NavBar = ({ history }) => {
                         <li className="nav-item">
                             <Link className={isActive(history, "/")} to="/">Home <span className="sr-only">(current)</span></Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className={isActive(history, "/about")} to="/about">About</Link>
                         </li>
                         <li className="nav-item">
                             <Link className={isActive(history, "/services")} to="/services">Services</Link>
-                        </li>
+                        </li> */}
 
                         <li className="nav-item">
                             <Link className={isActive(history, "/shop")} to="/shop">Shop</Link>
                         </li>
 
                         <li className="nav-item">
-                            <Link className={isActive(history, "/cart")} to="/cart">Cart</Link>
+                            <Link className={isActive(history, "/cart")} to="/cart">
+                                Cart{" "}
+                                <sup>
+                                    <small className="cart-badge">{itemTotal()}</small>
+                                </sup>
+                            </Link>
                         </li>
 
                         {/* ADMIN LINKS  */}
@@ -97,7 +107,7 @@ const NavBar = ({ history }) => {
                         {(isAuthenticated()) && (
                             <Fragment>
                                 <li className="nav-item dropdown">
-                                    <Link className="nav-link dropdown-toggle" to="/"
+                                    <Link className="nav-link nav-link-topmenu dropdown-toggle" to="/"
                                         id="navbarDropdown" role="button"
                                         data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
@@ -106,7 +116,7 @@ const NavBar = ({ history }) => {
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <Link className="dropdown-item" to="/">Update Profile</Link>
                                         <Link className="dropdown-item" to="#"
-                                            onClick={()=>handleRedirect(history)}
+                                            onClick={() => handleRedirect(history)}
                                         >Dashboard</Link>
                                         <div className="dropdown-divider"></div>
                                         <Link className="dropdown-item" to="#"

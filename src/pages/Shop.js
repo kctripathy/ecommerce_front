@@ -9,44 +9,54 @@ import { prices } from "../core/fixedPrices";
 
 
 const Shop = () => {
-	
+	//console.log("rendering shop.....")
 	const [myFilters, setMyFilters] = useState({
         filters: { category: [], price: [] }
     });
     const [categories, setCategories] = useState([]);
-    //const [filteredCategories, setFilteredCategories] = useState([]);
+    const [productCategories, setProductCategories] = useState([]);
 	const [error, setError] = useState(false);
     const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
     const [filteredResults, setFilteredResults] = useState([]);
+     
+    const [items, setItems] = useState([]);
+    const [run, setRun] = useState(false);
+
+    useEffect(() => {
+        //console.log("useEffect.....")
+        init();
+        loadFilteredResults(skip, limit, myFilters.filters);			
+    }, [run]);
+
 
     const init = () => {
-		
+		let allCategory;
 		getCategories().then( data =>{
 			if (data.error){
 				setError(data.error)
 				return
-			}
+            }
+            allCategory = data;
 			setCategories(data);	
 		});
-		/*
+		 
         getProductCategories().then(data => {
             if (data.error) {				 
                 setError(data.error);
             } else {
-				debugger;
-                setFilteredCategories(data);
+                const prodCategory = allCategory.filter((item)=>{
+                    return data.includes(item._id) 
+                })
+                setProductCategories(prodCategory);
             }
-        });
-		*/
-		
+        });		 		
     };
 
     const loadFilteredResults = newFilters => {
-        // console.log(newFilters);
+       
         getFilteredProducts(skip, limit, newFilters).then(data => {
-			//debugger;
 			if (!data) {
 				setError({error:" error in filter "});
 			}
@@ -87,12 +97,6 @@ const Shop = () => {
         );
     };
 
-    useEffect(() => {
-        init();
-        loadFilteredResults(skip, limit, myFilters.filters);
-		
-		
-    }, []);
 
     const handleFilters = (filters, filterBy) => {
         // console.log("SHOP", filters, filterBy);
@@ -119,9 +123,6 @@ const Shop = () => {
         return array;
     };
 
-
-//console.log("categories=",categories);
-//console.log("filteredCategories=",filteredCategories);	
 return (
         <Layout
             title="Shop "
@@ -133,13 +134,12 @@ return (
 					<h4>Filter by categories</h4>
                     <ul>
                         <CheckBox
-                            categories={categories}
+                            categories={productCategories}
                             handleFilters={filters =>
                                 handleFilters(filters, "category")
                             }
-                        />
-                    </ul>					
-					
+                        />                         
+                    </ul>										
 					<h4>Filter by price range</h4>
                     <div>
                         <RadioBox
@@ -148,18 +148,18 @@ return (
                                 handleFilters(filters, "price")
                             }
                         />
-                    </div>					 
-				
+                    </div>					 				
 				</div>
 
-                <div className="col-8">
-                    <h2 className="mb-4">Shop</h2>
-                    <hr />
+                <div className="col-8">                   
                     <h2 className="mb-4">Products</h2>
                     <div className="row">
                         {filteredResults.map((product, i) => (
                             <div key={i} className="col-4 mb-3">
-                                <Card product={product} />
+                                <Card product={product}  
+                                    cartUpdate={false}
+                                    setRun={setRun}
+                                    run={run} />
                             </div>
                         ))}
                     </div>

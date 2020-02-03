@@ -9,6 +9,7 @@ const Product = (props) => {
 	const [relatedProducts, setRelatedProducts] = useState([]);
     const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(true);
+	const [run, setRun] = useState(false);
  
      const loadSingleProduct = productId => {		 
         read(productId).then(data => {
@@ -33,8 +34,8 @@ const Product = (props) => {
 		//loadSingleAndProducts();	
 		const productId = props.match.params.productId;
 		loadSingleProduct(productId);
-		console.log("productId",productId)
-	},[props]);
+		//console.log("productId",productId)
+	},[props,run]);
 	
 		
 	return (
@@ -42,15 +43,17 @@ const Product = (props) => {
 			 <div className='row fluid'>
 				<div className='col-6'>
 					<h3>Product Detail</h3>
-					<Card product={product} />
+					<Card product={product} showViewButton={false} setRun={setRun}/>
+					{/* {JSON.stringify(product,null,4)} */}
 				</div>
 				<div className='col-6'>					
 					<h3>Related Products</h3>
 					<div className='row'>
 					{											
-						relatedProducts.map((p,i) =><div className='col-6'><Card key={i} product={p} /></div>)
+						relatedProducts.map((p,i) =><div key={i} className='col-6'><Card setRun={setRun} product={p} /></div>)
 					}
 					</div>
+					{/* {JSON.stringify(relatedProducts,null,4)} */}
 				</div>
 			 </div>			 
 	</Layout>

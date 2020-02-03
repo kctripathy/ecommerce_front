@@ -9,7 +9,7 @@ const Layout = ({ title = "Title", description = "Description", className, child
             <Header />
             <NavBar />            
             <div className="jumbotron">          
-                    <h1 className="display-10">{title}</h1>                    
+                    <h1 className="display-5">{title}</h1>                    
                     <p>{description}</p>                    
             </div>
             <div className={className} style={{ minHeight: "500px" }}>

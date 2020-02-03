@@ -15,6 +15,9 @@ import AddCategory from './admin/AddCategory';
 import AddProduct from './admin/AddProduct';
 import Cart from './pages/Cart';
 import Shop from './pages/Shop';
+import Orders from './admin/Orders';
+import ManageProducts from './admin/ManageProducts';
+import UpdateProduct from './admin/UpdateProduct';
 
 const Routers = () => (
     <>
@@ -32,7 +35,9 @@ const Routers = () => (
                 <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
                 <AdminRoute path="/create/category" exact component={AddCategory} />
                 <AdminRoute path="/create/product" exact component={AddProduct} />
-                
+                <AdminRoute path="/admin/orders" exact component={Orders} />
+                <PrivateRoute path="/admin/products" exact component={ManageProducts} />
+                <AdminRoute path="/admin/product/update/:productId" exact component={UpdateProduct} />
                 <Route component={PageNotFound} />
             </Switch>
         </Router>
