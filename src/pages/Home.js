@@ -21,6 +21,10 @@ const Home = () => {
 		loadProductsByArrival();
 	}, [run]);
 
+	const setRunFunctionHome=()=>{
+		//console.log("setRunFunctionHome.....");
+		setRun(!run);
+	}
 	const loadProductsByArrival = () => {
 		getProducts('createdAt').then(data => {
 			if (data.error) {
@@ -39,7 +43,7 @@ const Home = () => {
  				description="Node React E-commerce App"  
  				className="container-fluid">  
 
-			<Search setRun={setRun} />
+			<Search setRunFunctionHome={setRunFunctionHome} />
 			{loading ? (<ShowLoading showLoading={loading} />) : (
 				<>
 					<h2>Products By Arrival </h2>
