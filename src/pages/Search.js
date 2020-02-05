@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getCategories, list } from "../core/apiCore";
 import Card from "../core/Card";
 
-const Search = () => {
+const Search = (props) => {
     const [data, setData] = useState({
         categories: [],
         category: "",
@@ -13,6 +13,10 @@ const Search = () => {
 
     const { categories, category, search, results, searched } = data;
 
+    const setRunFunction=(val)=>{
+        //console.log("setRunFunction...........",val)
+         props.setRunFunctionHome();
+    }
     const loadCategories = () => {
         getCategories().then(data => {
             if (data.error) {
@@ -70,7 +74,7 @@ const Search = () => {
                 <div className="row">
                     {results.map((product, i) => (
                         <div key={i} className="col-4 mb-3">
-                            <Card  product={product} />
+                            <Card  product={product} setRun={setRunFunction} />
                         </div>
                     ))}
                 </div>
